@@ -6,6 +6,6 @@ module.exports = {
         }
     },
     devServer: {
-        port: 8082 //dev port
+        port: 8080 //dev port
     }
 }
