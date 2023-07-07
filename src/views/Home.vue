@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="HOME"/>
 
   </div>
 </template>
@@ -14,6 +14,10 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  mounted() {
+    console.log('age:',this.$route.query.age)
+
   }
 }
 </script>

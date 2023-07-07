@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {getToken} from "@/utils/util";
+import {getToken} from "@/utils/utils";
 
 var urls = require('@/api/urls')
 

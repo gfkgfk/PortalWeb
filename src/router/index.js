@@ -1,37 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import routes from './routers'
+import {getToken} from "@/utils/utils";
 
 Vue.use(VueRouter)
 
-const routes = [
-    {
-        path: '/',
-        redirect: '/home',
-    },
-    {
-        path: '/home',
-        name: 'Home',
-        component: Home
-    },
-    {
-        path: '/404',
-        name: '404',
-        component: resolve => require(['@/views/system/error/404'], resolve),
-    },
-    {
-        path: '/Main',
-        name: 'Main',
-        component: resolve => require(['@/views/Main'], resolve)
-    },
-    {
-        path: '*',
-        redirect: '/404',
-    }
-]
-
 const router = new VueRouter({
+    // mode: 'hash',
+    // base: process.env.BASE_URL,
     routes
 })
+
+//白名单
+const whitePathList = ['/home', '/About','/About/about2']
+//全局前置路由
+router.beforeEach((to, from, next) => {
+
+    //白名单校验，否则检查是否有token
+    if (whitePathList.indexOf(to.path) != -1) {
+        next()
+    } else if (!getToken()) {
+        next('/home')
+    } else {
+        next()
+    }
+
+
+});
+
+//全局后置路由
+router.afterEach((to) => {
+    window.scrollTo(0, 0);
+});
 
 export default router

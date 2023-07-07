@@ -6,6 +6,9 @@
     <button @click="test3()">请求测试3</button>
     <div> 测试:{{showStr}} </div>
     <div> 测试:{{showStr2}} </div>
+    <router-link to="/About">跳转测试1</router-link>
+    <button @click="jump2()">跳转测试2</button>
+    <button @click="jump3()">跳转测试3</button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -64,8 +67,24 @@ export default {
       this.$api.post('https://www.baidu.com/')
     },
     test3(){
-      console.log('test3')
+      this.$api.send('hello2',{age:99},{
+        headers: {
+          // 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',  // application/json;charset=utf-8
+          'Content-Type': 'application/json;charset=utf-8',  // application/json;charset=utf-8
+        },
+      }).then(res=>{
+        console.log('hello2',res)
+      })
     },
+    jump1(){
+      console.log('jump1')
+    },
+    jump2(){
+      console.log('jump2')
+    },
+    jump3(){
+      console.log('jump3')
+    }
   }
 }
 </script>
