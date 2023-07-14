@@ -12,7 +12,7 @@ const router = new VueRouter({
 })
 
 //白名单
-const whitePathList = ['/home', '/About','/About/about2']
+const whitePathList = ['/home','/login', '/About','/About/about2']
 //全局前置路由
 router.beforeEach((to, from, next) => {
 
@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
     if (whitePathList.indexOf(to.path) != -1) {
         next()
     } else if (!getToken()) {
-        next('/home')
+        next('/login')
     } else {
         next()
     }

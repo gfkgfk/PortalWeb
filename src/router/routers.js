@@ -3,7 +3,12 @@ import Home from "@/views/Home";
 export default [
     {
         path: '/',
-        redirect: '/home',
+        redirect: '/login',
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: resolve => require(['@/views/login/login'], resolve),
     },
     {
         path: '/home',

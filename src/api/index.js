@@ -56,7 +56,6 @@ function getInstance(){
         }
 
         let url = process.env.VUE_APP_BASE_URL + urls.default[name].url
-        console.log('urlurlL:',url)
         let data = params
         let type = urls.default[name].type
         // Generate get request parameters

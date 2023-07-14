@@ -3,6 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import {api} from "@/api";
+// 引入ElementUI组件库
+import ElementUI from 'element-ui';
+//引入ElementUI的所有样式
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 //绑定API
