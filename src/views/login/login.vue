@@ -39,7 +39,7 @@ export default {
       }
       this.$api.send('login', param).then(res => {
         console.log('登录', res)
-        if (res.statusCode == 200 && res.data.resultCode == 200) {
+        if (res.data.resultCode == 200) {
           this.$router.push({path: '/home'})
         } else {
           this.$message.error('用户名密码错误');
