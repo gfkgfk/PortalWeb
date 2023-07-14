@@ -57,7 +57,6 @@ export default {
   },
   props:['isCollapse'],
   mounted() {
-    console.log(this.isCollapse)
   },
   methods: {
     handleOpen() {
