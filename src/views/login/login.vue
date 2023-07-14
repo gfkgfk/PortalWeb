@@ -22,7 +22,10 @@
 </template>
 
 <script>
+import * as utils from '@/utils/utils'
+import {setStorage} from "@/utils/utils";
 export default {
+
   name: "login",
   data() {
     return {
@@ -40,7 +43,9 @@ export default {
       this.$api.send('login', param).then(res => {
         console.log('登录', res)
         if (res.data.resultCode == 200) {
-          this.$router.push({path: '/home'})
+          utils.setToken(res.data.data.token)
+          utils.setStorage('userInfo',JSON.stringify(res.data.data))
+          this.$router.push({path: '/mainpage'})
         } else {
           this.$message.error('用户名密码错误');
         }

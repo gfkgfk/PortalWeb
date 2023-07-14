@@ -15,7 +15,6 @@ const router = new VueRouter({
 const whitePathList = ['/home','/login', '/About','/About/about2']
 //全局前置路由
 router.beforeEach((to, from, next) => {
-
     //白名单校验，否则检查是否有token
     if (whitePathList.indexOf(to.path) != -1) {
         next()

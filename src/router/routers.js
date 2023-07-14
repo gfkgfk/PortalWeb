@@ -21,9 +21,9 @@ export default [
         component: resolve => require(['@/views/system/error/404'], resolve),
     },
     {
-        path: '/Main',
-        name: 'Main',
-        component: resolve => require(['@/views/Main'], resolve)
+        path: '/mainpage',
+        name: 'mainpage',
+        component: resolve => require(['@/views/main/mainpage'], resolve)
     },
     {
         path: '/About',
