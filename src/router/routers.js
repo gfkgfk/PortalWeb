@@ -23,7 +23,26 @@ export default [
     {
         path: '/mainpage',
         name: 'mainpage',
-        component: resolve => require(['@/views/main/mainpage'], resolve)
+        component: resolve => require(['@/views/main/mainpage'], resolve),
+        children: [
+            {path: 'mainsubpage1', component: resolve => require(['@/views/main/mainsubpage1'],resolve)},
+        ]
+    },
+    {
+        path: '/mainpage2',
+        name: 'mainpage2',
+        component: resolve => require(['@/views/main/mainpage'], resolve),
+        children: [
+            {path: 'mainsubpage2', component: resolve => require(['@/views/main/mainsubpage2'],resolve)},
+        ]
+    },
+    {
+        path: '/mainpage3',
+        name: 'mainpage3',
+        component: resolve => require(['@/views/main/mainpage'], resolve),
+        children: [
+            {path: 'mainsubpage3/mainsubpage31', component: resolve => require(['@/views/main/mainsubpage3'],resolve)},
+        ]
     },
     {
         path: '/About',

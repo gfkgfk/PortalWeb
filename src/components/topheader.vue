@@ -65,6 +65,7 @@ export default {
 }
 
 .logo {
+  margin-left: 20px;
 }
 
 .toggle {
@@ -77,6 +78,7 @@ export default {
   margin-left: auto;
   display: flex;
   align-items: center;
+  margin-right: 20px;
 }
 
 .user-name {
@@ -94,7 +96,7 @@ export default {
 }
 
 .user-setting:hover {
-  color: #409eff;
+  color: white;
 }
 
 </style>
