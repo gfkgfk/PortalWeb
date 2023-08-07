@@ -46,11 +46,11 @@
         <el-col :span="5" >
             <el-card >
               <div slot="header" class="clearfix">
-                <span>今日公告</span>
+                <span>最新公告</span>
                 <el-button style="float: right; padding: 3px 0" type="text">详情</el-button>
               </div>
-              <div v-for="o in 4" :key="o" class="notice-text">
-                {{'公告内容 ' + o }}
+              <div  v-for="(item,index) in announcementArr" :key="index" class="notice-text">
+                <div class="announcement-title" @click="toAnnouncement(item)">{{item.title}}</div>
               </div>
             </el-card>
         </el-col>
@@ -88,14 +88,35 @@
 </template>
 
 <script>
+import * as utils from "@/utils/utils";
+
 export default {
   name: "mainsubpage1",
   data(){
     return {
-
+      announcementArr:[]
     }
   },
+  mounted() {
+    this.getAllAnnouncement()
+  },
   methods:{
+    getAllAnnouncement(){
+      let param = {
+      }
+      this.$api.send('getAllAnnouncement', param).then(res => {
+        if (res.data.state == 200) {
+          this.announcementArr=res.data.data
+        } else {
+          this.$message.error('网络错误');
+        }
+      }).catch(error => {
+        this.$message.error('网络请求错误');
+      })
+    },
+    toAnnouncement(item){
+      this.$router.push({path:'/mainpage/announcement', query: {id: item.id}})
+    },
     tohome(){
 
     },
@@ -143,7 +164,15 @@ export default {
   display: flex;
   width: 100%;
   padding: 50px;
+  .announcement-title{
+    text-overflow:ellipsis;
+    white-space:nowrap;
 
+  }
+  .announcement-title:hover{
+    color: #49b0f3;
+    cursor: pointer;
+  }
 }
 .notice-text{
   font-size: 14px;

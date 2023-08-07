@@ -20,12 +20,14 @@ export default [
         name: '404',
         component: resolve => require(['@/views/system/error/404'], resolve),
     },
+
     {
         path: '/mainpage',
         name: 'mainpage',
         component: resolve => require(['@/views/main/mainpage'], resolve),
         children: [
             {path: 'mainsubpage1', component: resolve => require(['@/views/main/mainsubpage1'],resolve)},
+            {path: 'announcement',  component: resolve => require(['@/views/community/announcement'], resolve)},
         ]
     },
     {

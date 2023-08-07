@@ -45,7 +45,7 @@ export default {
         if (res.data.resultCode == 200) {
           utils.setToken(res.data.data.token)
           utils.setStorage('userInfo',JSON.stringify(res.data.data))
-          this.$router.push({path: '/mainpage'})
+          this.$router.push({path: '/mainpage/mainsubpage1'})
         } else {
           this.$message.error('用户名密码错误');
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="content">
-    <div class="title">xxxxxxxxx</div>
-    <div class="subtitle">xxxxxxxxxxxxxxxxxxxxxxxxxxx</div>
+    <div class="title">医疗智能设备数据采集信息系统</div>
+    <div class="subtitle">2023.8.01-2023.8.01 xxxxxxxxxxxxx</div>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 }
 .title{
   color: white;
-  font-size: 20px;
+  font-size: 15px;
 }
 .subtitle{
   color: white;

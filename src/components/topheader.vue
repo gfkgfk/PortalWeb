@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="logo">XXXXXXXX</div>
+    <div class="logo">医疗智能设备数据采集信息系统</div>
     <div class="toggle">
       <i :class="isCollapse?'el-icon-s-fold user-setting':'el-icon-s-unfold user-setting'" @click="toggleMenu()"></i>
     </div>
