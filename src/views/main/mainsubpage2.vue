@@ -65,15 +65,12 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted')
     this.getMeasureHistory()
   },
   methods: {
     getMeasureHistory() {
       let param = {}
-      console.log('开始请求')
       this.$api.send('getMeasureDetailsList', param).then(res => {
-        console.log('res', res)
         if (res.data.state == 200) {
           this.tableData = res.data.data
         } else {
