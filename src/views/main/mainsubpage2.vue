@@ -49,6 +49,27 @@
         </template>
       </el-table-column>
     </el-table>
+
+
+    <el-dialog
+        title="评估/反馈"
+        :visible.sync="dialogVisible"
+        width="30%"
+        :before-close="handleClose">
+      <el-input
+          :autosize="{ minRows: 4, maxRows: 10}"
+          type="textarea"
+          placeholder="请输入内容"
+          v-model="content">
+      </el-input>
+      <div class="dialog-operation">
+        <el-button @click="cancel()">取 消</el-button>
+        <el-button type="primary" @click="confirm()">确 定</el-button>
+      </div>
+
+    </el-dialog>
+
+
   </div>
 
 </template>
@@ -62,6 +83,9 @@ export default {
   data() {
     return {
       tableData: [],
+      content: '',
+      dialogVisible:false,
+      selectedMeasure:{},
     }
   },
   mounted() {
@@ -85,12 +109,49 @@ export default {
       return dateFormat(fmt, date)
     },
     handleEdit(index, item) {
-      console.log(index, item)
-      this.$message.error('功能暂未开放');
+
+      console.log(item)
+      this.selectedMeasure = item
+      let param = {measureId:item.id}
+      this.$api.send('getFeedBackById', param).then(res => {
+        if (res.data.state == 200) {
+          if(null==res.data.data){
+            this.content = ''
+          }else {
+            this.content = res.data.data.content
+          }
+          this.dialogVisible = true
+        } else {
+          this.$message.error('网络错误');
+        }
+      }).catch(error => {
+        console.log(error)
+        this.$message.error('网络请求错误');
+      })
+    },
+    handleClose(){
+      this.dialogVisible = false;
     },
     handleDelete(index, item) {
       console.log(index, item)
       this.$message.error('功能暂未开放');
+    },
+    confirm(){
+      this.dialogVisible = false
+      let param = {measureId:this.selectedMeasure.id,content:this.content}
+      this.$api.send('updateFeedback', param).then(res => {
+        if (res.data.state == 200) {
+          console.log(res.data)
+        } else {
+          this.$message.error('网络错误');
+        }
+      }).catch(error => {
+        console.log(error)
+        this.$message.error('网络请求错误');
+      })
+    },
+    cancel(){
+      this.dialogVisible = false
     }
   }
 }
@@ -108,5 +169,11 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   align-items: center;
 
+}
+
+.dialog-operation{
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
