@@ -28,6 +28,7 @@ export default [
         children: [
             {path: 'mainsubpage1', component: resolve => require(['@/views/main/mainsubpage1'],resolve)},
             {path: 'announcement',  component: resolve => require(['@/views/community/announcement'], resolve)},
+            {path: 'addAnnouncement',  component: resolve => require(['@/views/community/addAnnouncement'], resolve)},
         ]
     },
     {

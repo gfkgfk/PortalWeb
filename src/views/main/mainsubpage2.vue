@@ -69,6 +69,19 @@
 
     </el-dialog>
 
+    <el-dialog
+        title="评估/反馈"
+        :visible.sync="deleteDialogVisible"
+        width="30%"
+        :before-close="handleDeleteClose">
+      <div>删除后无法恢复，请确认是否要删除?</div>
+      <div class="dialog-operation">
+        <el-button @click="deleteCancel()">取 消</el-button>
+        <el-button type="primary" @click="deleteConfirm()">确 定</el-button>
+      </div>
+
+    </el-dialog>
+
 
   </div>
 
@@ -84,8 +97,9 @@ export default {
     return {
       tableData: [],
       content: '',
-      dialogVisible:false,
-      selectedMeasure:{},
+      dialogVisible: false,
+      deleteDialogVisible:false,
+      selectedMeasure: {},
     }
   },
   mounted() {
@@ -112,12 +126,12 @@ export default {
 
       console.log(item)
       this.selectedMeasure = item
-      let param = {measureId:item.id}
+      let param = {measureId: item.id}
       this.$api.send('getFeedBackById', param).then(res => {
         if (res.data.state == 200) {
-          if(null==res.data.data){
+          if (null == res.data.data) {
             this.content = ''
-          }else {
+          } else {
             this.content = res.data.data.content
           }
           this.dialogVisible = true
@@ -129,19 +143,37 @@ export default {
         this.$message.error('网络请求错误');
       })
     },
-    handleClose(){
+    handleClose() {
       this.dialogVisible = false;
+    },
+    handleDeleteClose() {
+      this.deleteDialogVisible = false;
     },
     handleDelete(index, item) {
       console.log(index, item)
-      this.$message.error('功能暂未开放');
+      this.selectedMeasure = item
+      this.deleteDialogVisible = true
     },
-    confirm(){
+    deleteMeasureDetailById() {
+      let param = {id: this.selectedMeasure.id}
+      this.$api.send('deleteMeasureDetailById', param).then(res => {
+        if (res.data.state == 200) {
+          this.$message.success('操作成功');
+          this.getMeasureHistory()
+        } else {
+          this.$message.error('网络错误');
+        }
+      }).catch(error => {
+        this.$message.error('网络请求错误');
+      })
+    },
+    confirm() {
       this.dialogVisible = false
-      let param = {measureId:this.selectedMeasure.id,content:this.content}
+      let param = {measureId: this.selectedMeasure.id, content: this.content}
       this.$api.send('updateFeedback', param).then(res => {
         if (res.data.state == 200) {
           console.log(res.data)
+          this.$message.success('评估/反馈成功');
         } else {
           this.$message.error('网络错误');
         }
@@ -150,9 +182,18 @@ export default {
         this.$message.error('网络请求错误');
       })
     },
-    cancel(){
+    cancel() {
       this.dialogVisible = false
+    },
+    deleteCancel(){
+      this.deleteDialogVisible = false
+    },
+    deleteConfirm(){
+      this.deleteDialogVisible = false
+      this.deleteMeasureDetailById()
     }
+
+
   }
 }
 </script>
@@ -171,7 +212,7 @@ export default {
 
 }
 
-.dialog-operation{
+.dialog-operation {
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;

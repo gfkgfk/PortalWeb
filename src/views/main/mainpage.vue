@@ -87,12 +87,12 @@ export default {
               path: '/mainpage3',
               iconType: 's-operation',
               submenu: [{
-                name: '控制台',
+                name: '系统业务',
                 path: '/mainpage3/mainsubpage3',
                 type: 'submenu',
                 iconType: 's-cooperation',
                 submenu: [{
-                  name: '控制台3-1-1 /-----------长度测试------------/',
+                  name: '公告管理',
                   path: '/mainpage3/mainsubpage3/mainsubpage31',
                   type: 'item',
                   iconType: 's-claim'
